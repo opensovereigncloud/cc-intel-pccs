@@ -1,8 +1,6 @@
-image: "intel/pccs:v2.4"
+image: "intel/pccs"
+version: "v2.4"
 replicas: 1
-
-imagePullSecrets:
-  - name: pccs-pull-secret
 
 # pod-level security settings to minimize security risks
 podSecurityContext:

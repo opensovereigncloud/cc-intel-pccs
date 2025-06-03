@@ -22,7 +22,7 @@ spec:
       securityContext: {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Release.Name | default "pccs"  }}
-          image: {{ .Values.image }}
+          image: "{{ .Values.image }}:{{ .Values.version }}"
           ports:
             - name: pccs-https-port
               containerPort: {{ .Values.pccsConfig.httpsPort }}
