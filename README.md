@@ -19,11 +19,9 @@ git clone https://github.com/scontain/cc-intel-pccs.git
 cd cc-intel-pccs
 ```
 
-Then, configure all parameters marked with "!REQUIRED" in `charts/pccs/values.yaml`.
+### Deploy PCCS
 
-## Deploy PCCS
-
-Deploy PCCS using Helm:
+First, configure all parameters marked with "!REQUIRED" in `charts/pccs/values.yaml`. Then, deploy PCCS using Helm:
 
 ```bash
 helm install pccs ./charts/pccs --namespace pccs --create-namespace --wait
