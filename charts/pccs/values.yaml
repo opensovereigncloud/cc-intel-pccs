@@ -2,6 +2,20 @@ image: "intel/pccs"
 version: "v2.4"
 replicas: 1
 
+imagePullSecrets:
+  # Set to true to create an image pull secret automatically
+  # using the credentials provided below.
+  enabled: true
+  data:
+    # Docker registry username
+    username: raisson
+    # Docker registry password or personal access token
+    password: teste
+    # Email associated with the Docker registry account
+    email: myuser@example.com
+    # Docker registry URL
+    registry: https://index.docker.io/v1/
+
 # pod-level security settings to minimize security risks
 podSecurityContext:
   # We run the container using the same user defined in the image.
