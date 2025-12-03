@@ -69,7 +69,20 @@ readinessProbe:
 
 # PCCS Kubernetes service configuration
 service:
+  # Kubernetes Service type
+  # ClusterIP | NodePort
+  type: ClusterIP
+
+  # Enable headless service (only applies when type = ClusterIP)
+  headless: true
+
+  # Service port exposed inside the cluster
   port: 8081
+
+  # Fixed NodePort value (only applies when type = NodePort)
+  # If null, Kubernetes will assign one automatically
+  # Example: 30080
+  nodePort: null
 
 fluentbit:
   # Enable or disable the Fluent Bit sidecar container
@@ -170,7 +183,7 @@ fluentbit:
 ingress:
 
   # Enables or disables Ingress resource creation
-  enabled: true
+  enabled: false
 
   # The fully-qualified domain name that routes traffic to this service.
   # Replace with your actual domain name.
@@ -197,10 +210,6 @@ ingress:
 
     # Health probes
     - /health/
-
-  # Enables backend TLS verification (mutual TLS verification with the backend service)
-  nginx:
-    backendVerification: true
 
   # Optional: Additional annotations
   annotations: {}

@@ -101,6 +101,39 @@ helm install cert-manager jetstack/cert-manager --set installCRDs=true \
 kubectl rollout status deployment/cert-manager -n cert-manager --timeout=120s
 ```
 
+### Exposing PCCS (Important)
+
+This chart does not install an ingress controller. If your cluster already provides one (nginx, traefik, etc.), enable ingress and set the correct one:
+
+```bash
+helm install ... --set ingress.enabled=true --set ingress.className=<controller>
+```
+
+For more configuration details, see the ingress section in `values.yaml`. If your cluster does not have an ingress controller installed, choose one of the following ways to expose the PCCS service:
+
+1. Install an ingress controller (recommended)
+
+    Example with nginx. Remember to use the flags above when installing PCCS:
+
+    ```bash
+    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+    helm install ingress-nginx ingress-nginx/ingress-nginx
+    ```
+
+1. Expose PCCS using NodePort
+
+    ```bash
+    service:
+      type: NodePort
+      nodePort: 32000
+    ```
+
+1. Development only – port-forward after deploying PCCS
+
+    ```bash
+    kubectl port-forward -n pccs svc/pccs 8081:8081
+    ```
+
 ### Deploy PCCS
 
 Before deploying, you **must set your Intel DCAP API key** as an environment variable. If not provided, the PCCS service will fail to start and certificate retrieval will not work.
