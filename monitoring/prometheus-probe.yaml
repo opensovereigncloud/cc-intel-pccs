@@ -32,7 +32,7 @@ spec:
   jobName: pccs
   prober:
     url: http://blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc:9115
-  module: https_2xx
+  module: http_2xx
   targets:
     staticConfig:
       static:
